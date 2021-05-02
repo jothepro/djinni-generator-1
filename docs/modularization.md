@@ -127,9 +127,20 @@ struct Record1
 };
 ```
 
-```
+```cpp
 // For C++ <-> C++/CLI
-// TODO
+public ref class Record1 {
+public:
+    // Record1 public properties
+internal:
+    using CppType = ::mylib::Record1;
+    using CsType = Record1^;
+
+    static CppType ToCpp(CsType cs) { return /* your magic here */; }
+    static CsType FromCpp(const CppType& cs) { return /* your magic here */; }
+private:
+    // Record1 properties' backing fields
+}
 ```
 
 For `interface` classes the `CppType` alias is expected to be a `std::shared_ptr<T>`.
