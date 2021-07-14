@@ -84,8 +84,10 @@ object Main {
     var objcppNamespace: String = "djinni_generated"
     var objcBaseLibIncludePrefix: String = "djinni/objc/"
     var cppCliOutFolder: Option[File] = None
+    var cppCliHeaderOutFolderOptional: Option[File] = None
     var cppCliIdentStyle = IdentStyle.csDefault
     var cppCliNamespace: String = ""
+    var cppCliIncludePrefix: String = ""
     var cppCliIncludeCppPrefix: String = ""
     var cppCliBaseLibIncludePrefix: String = "djinni/cppcli/"
     var inFileListPath: Option[File] = None
@@ -249,8 +251,12 @@ object Main {
       note("\nC++/CLI")
       opt[File]("cppcli-out").valueName("<out-folder>").foreach(x => cppCliOutFolder = Some(x))
         .text("The output folder for C++/CLI files (Generator disabled if unspecified).")
+      opt[File]("cppcli-header-out").valueName("<out-folder>").foreach(x => cppCliHeaderOutFolderOptional = Some(x))
+        .text("The output folder for C++/CLI header files (default: the same as --cppcli-out).")
       opt[String]("cppcli-namespace").valueName("...").foreach(cppCliNamespace = _)
         .text("The namespace name to use for generated C++/CLI classes.")
+      opt[String]("cppcli-include-prefix").valueName("<prefix>").foreach(x => cppCliIncludePrefix = x)
+        .text("The prefix for #include of C++/CLI header files from C++/CLI source files.")
       opt[String]("cppcli-include-cpp-prefix").valueName("<prefix>").foreach(x => cppCliIncludeCppPrefix = x)
         .text("The prefix for #include of the main C++ header files from C++/CLI files.")
       opt[String]("cppcli-base-lib-include-prefix").valueName("<prefix>").foreach(x => cppCliBaseLibIncludePrefix = x)
@@ -328,6 +334,7 @@ object Main {
     val objcHeaderOutFolder = if (objcHeaderOutFolderOptional.isDefined) objcHeaderOutFolderOptional else objcOutFolder
     val objcppHeaderOutFolder = if (objcppHeaderOutFolderOptional.isDefined) objcppHeaderOutFolderOptional else objcppOutFolder
     val cWrapperHeaderOutFolder = if (cWrapperHeaderOutFolderOptional.isDefined) cWrapperHeaderOutFolderOptional else cWrapperOutFolder
+    val cppCliHeaderOutFolder = if(cppCliHeaderOutFolderOptional.isDefined) cppCliHeaderOutFolderOptional else cppCliOutFolder
     val jniClassIdentStyle = jniClassIdentStyleOptional.getOrElse(cppIdentStyle.ty)
     val jniBaseLibClassIdentStyle = jniBaseLibClassIdentStyleOptional.getOrElse(jniClassIdentStyle)
     val jniFileIdentStyle = jniFileIdentStyleOptional.getOrElse(cppFileIdentStyle)
@@ -367,7 +374,7 @@ object Main {
 
     // Ensure either --cpp-namespace or --objc-type-prefix are given when Objective-C is generated
     if(objcOutFolder.isDefined) {
-      if (cppNamespace.isEmpty() && objcTypePrefix.isEmpty()) {
+      if (cppNamespace.isEmpty && objcTypePrefix.isEmpty) {
           System.err.println("Error: At least one of [--cpp-namespace, --objc-type-prefix] needs to be set when generating Objective-C code.")
           System.exit(1); return
       }
@@ -462,8 +469,10 @@ object Main {
       objcBaseLibIncludePrefix,
       objcSwiftBridgingHeaderWriter,
       cppCliOutFolder,
+      cppCliHeaderOutFolder,
       cppCliIdentStyle,
       cppCliNamespace,
+      cppCliIncludePrefix,
       cppCliIncludeCppPrefix,
       cppCliBaseLibIncludePrefix,
       objcSwiftBridgingHeaderName,
@@ -478,7 +487,7 @@ object Main {
       pycffiOutFolder,
       pycffiPackageName,
       pycffiDynamicLibList,
-      idlFile.getName(),
+      idlFile.getName,
       cWrapperOutFolder,
       cWrapperHeaderOutFolder,
       cWrapperIncludePrefix,

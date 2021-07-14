@@ -82,8 +82,10 @@ package object generatorTools {
                    objcBaseLibIncludePrefix: String,
                    objcSwiftBridgingHeaderWriter: Option[Writer],
                    cppCliOutFolder: Option[File],
+                   cppCliHeaderOutFolder: Option[File],
                    cppCliIdentStyle: CppCliIdentStyle,
                    cppCliNamespace: String,
+                   cppCliIncludePrefix: String,
                    cppCliIncludeCppPrefix: String,
                    cppCliBaseLibIncludePrefix: String,
                    objcSwiftBridgingHeaderName: Option[String],
@@ -252,18 +254,14 @@ package object generatorTools {
       if (spec.objcOutFolder.isDefined) {
         if (!spec.skipGeneration) {
           createFolder("Objective-C", spec.objcOutFolder.get)
-          if (spec.objcHeaderOutFolder.isDefined) {
-            createFolder("Objective-C header", spec.objcHeaderOutFolder.get)
-          }
+          createFolder("Objective-C header", spec.objcHeaderOutFolder.get)
         }
         new ObjcGenerator(spec).generate(idl)
       }
       if (spec.objcppOutFolder.isDefined) {
         if (!spec.skipGeneration) {
           createFolder("Objective-C++", spec.objcppOutFolder.get)
-          if (spec.objcppHeaderOutFolder.isDefined) {
-            createFolder("Objective-C++ header", spec.objcppHeaderOutFolder.get)
-          }
+          createFolder("Objective-C++ header", spec.objcppHeaderOutFolder.get)
         }
         new ObjcppGenerator(spec).generate(idl)
       }
@@ -277,6 +275,7 @@ package object generatorTools {
       if (spec.cppCliOutFolder.isDefined) {
         if (!spec.skipGeneration) {
           createFolder("C++/CLI", spec.cppCliOutFolder.get)
+          createFolder("C++/CLI header", spec.cppCliHeaderOutFolder.get)
         }
         new CppCliGenerator(spec).generate(idl)
       }

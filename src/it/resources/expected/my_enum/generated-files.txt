@@ -4,7 +4,7 @@ src/it/resources/result/my_enum/jni/djinni_jni_main.cpp
 src/it/resources/result/my_enum/jni-headers/my_enum.hpp
 src/it/resources/result/my_enum/objc-headers/ITMyEnum.h
 src/it/resources/result/my_enum/objcpp-headers/ITMyEnum+Private.h
-src/it/resources/result/my_enum/cppcli/MyEnum.hpp
+src/it/resources/result/my_enum/cppcli-headers/MyEnum.hpp
 src/it/resources/result/my_enum/cppcli/MyEnum.cpp
 src/it/resources/result/my_enum/python/my_enum.py
 src/it/resources/result/my_enum/cwrapper-headers/dh__my_enum.h

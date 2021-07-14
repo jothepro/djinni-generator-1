@@ -52,10 +52,10 @@ class CppCliGenerator(spec: Spec) extends Generator(spec) {
 
   def withCppCliNs(namespace: String, t: String): String = withNs(Some(namespace), t)
 
-  val writeCppCliCppFile = writeCppFileGeneric(spec.cppCliOutFolder.get, spec.cppCliNamespace, spec.cppCliIdentStyle.file, "") _
+  val writeCppCliCppFile: (String, String, Iterable[String], IndentWriter => Unit) => Unit = writeCppFileGeneric(spec.cppCliOutFolder.get, spec.cppCliNamespace, spec.cppCliIdentStyle.file, spec.cppCliIncludePrefix)
 
-  def writeCppCliHppFile(name: String, origin: String, includes: Iterable[String], fwds: Iterable[String], f: IndentWriter => Unit, f2: IndentWriter => Unit = w => {}) =
-    writeHppFileGeneric(spec.cppCliOutFolder.get, spec.cppCliNamespace, spec.cppCliIdentStyle.file)(name, origin, includes, fwds, f, f2)
+  def writeCppCliHppFile(name: String, origin: String, includes: Iterable[String], fwds: Iterable[String], f: IndentWriter => Unit, f2: IndentWriter => Unit = w => {}): Unit =
+    writeHppFileGeneric(spec.cppCliHeaderOutFolder.get, spec.cppCliNamespace, spec.cppCliIdentStyle.file)(name, origin, includes, fwds, f, f2)
 
   def generateConstants(w: IndentWriter, ident: Ident, r: Record, consts: Seq[Const]): Unit = {
     def writeCppCliLiteral(ty: TypeRef, v: Any) = {
