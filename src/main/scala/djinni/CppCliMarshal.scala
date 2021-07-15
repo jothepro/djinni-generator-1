@@ -57,7 +57,7 @@ class CppCliMarshal(spec: Spec) extends Marshal(spec) {
   }
 
   def include(ident: String, isExtendedRecord: Boolean = false): String = {
-    q(spec.cppCliIdentStyle.file(ident) + "." + spec.cppHeaderExt)
+    q(spec.cppCliIncludePrefix + spec.cppCliIdentStyle.file(ident) + "." + spec.cppHeaderExt)
   }
 
   def isReference(td: TypeDecl): Boolean = td.body match {
