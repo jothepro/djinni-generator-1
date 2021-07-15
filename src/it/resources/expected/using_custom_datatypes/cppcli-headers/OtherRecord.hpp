@@ -4,18 +4,18 @@
 #pragma once
 
 #include "../cpp-headers/other_record.hpp"
-#include "CustomDatatype.hpp"
+#include "../cppcli-headers/CustomDatatype.hpp"
 
 [System::Serializable]
 public ref class OtherRecord {
 public:
 
-    property CustomDatatype^ CustomDatatypeData
+    property ::CustomDatatype^ CustomDatatypeData
     {
-        CustomDatatype^ get();
+        ::CustomDatatype^ get();
     }
 
-    OtherRecord(CustomDatatype^ customDatatypeData);
+    OtherRecord(::CustomDatatype^ customDatatypeData);
 
     System::String^ ToString() override;
 
@@ -27,5 +27,5 @@ internal:
     static CsType FromCpp(const CppType& cpp);
 
 private:
-    CustomDatatype^ _customDatatypeData;
+    ::CustomDatatype^ _customDatatypeData;
 };

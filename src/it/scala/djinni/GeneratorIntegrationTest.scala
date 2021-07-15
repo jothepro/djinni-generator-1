@@ -195,6 +195,9 @@ class GeneratorIntegrationTest extends IntegrationTest with GivenWhenThen {
 
         Then("the file `generated-files.txt` should contain all generated files")
         assertFileContentEquals(idlFile, "", List("generated-files.txt"))
+
+        Then(s"the yaml interface file should contain the expected content: $idlFile.yaml")
+        assertFileContentEquals(idlFile, "", List(s"$idlFile.yaml"))
       }
     }
 
@@ -202,7 +205,7 @@ class GeneratorIntegrationTest extends IntegrationTest with GivenWhenThen {
       val idlFile = "cpp_dependent_interface"
       When(s"generating C++ language-bridges from `$idlFile.djinni`")
       val cppHeaderFilenames = CppHeaders("dependent_interface.hpp")
-      val cmd = djinniParams(idlFile, cpp=true, objc=false, java=false, python=false, cWrapper=false, cppCLI=false, useNNHeader=true)
+      val cmd = djinniParams(idlFile, cpp=true, objc=false, java=false, python=false, cWrapper=false, cppCLI=false, yaml=false, useNNHeader=true)
       djinni(cmd)
 
       Then(s"the expected header files should be created for cpp: ${cppHeaderFilenames.mkString(", ")}")

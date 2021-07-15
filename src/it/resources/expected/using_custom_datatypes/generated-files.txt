@@ -19,6 +19,7 @@ src/it/resources/result/using_custom_datatypes/cppcli-headers/CustomDatatype.hpp
 src/it/resources/result/using_custom_datatypes/cppcli/CustomDatatype.cpp
 src/it/resources/result/using_custom_datatypes/cppcli-headers/OtherRecord.hpp
 src/it/resources/result/using_custom_datatypes/cppcli/OtherRecord.cpp
+src/it/resources/result/using_custom_datatypes/using_custom_datatypes.yaml
 src/it/resources/result/using_custom_datatypes/python/custom_datatype.py
 src/it/resources/result/using_custom_datatypes/python/custom_datatype_helper.py
 src/it/resources/result/using_custom_datatypes/python/other_record.py

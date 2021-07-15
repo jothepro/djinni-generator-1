@@ -8,6 +8,7 @@ src/it/resources/result/my_client_interface/objcpp-headers/ITMyClientInterface+P
 src/it/resources/result/my_client_interface/objcpp/ITMyClientInterface+Private.mm
 src/it/resources/result/my_client_interface/cppcli-headers/MyClientInterface.hpp
 src/it/resources/result/my_client_interface/cppcli/MyClientInterface.cpp
+src/it/resources/result/my_client_interface/my_client_interface.yaml
 src/it/resources/result/my_client_interface/python/my_client_interface.py
 src/it/resources/result/my_client_interface/cwrapper-headers/cw__my_client_interface.h
 src/it/resources/result/my_client_interface/cwrapper/cw__my_client_interface.hpp

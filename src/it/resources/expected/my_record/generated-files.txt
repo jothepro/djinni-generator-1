@@ -10,6 +10,7 @@ src/it/resources/result/my_record/objcpp-headers/ITMyRecord+Private.h
 src/it/resources/result/my_record/objcpp/ITMyRecord+Private.mm
 src/it/resources/result/my_record/cppcli-headers/MyRecord.hpp
 src/it/resources/result/my_record/cppcli/MyRecord.cpp
+src/it/resources/result/my_record/my_record.yaml
 src/it/resources/result/my_record/python/dh__set_string.py
 src/it/resources/result/my_record/python/dh__map_string_int32_t.py
 src/it/resources/result/my_record/python/my_record.py

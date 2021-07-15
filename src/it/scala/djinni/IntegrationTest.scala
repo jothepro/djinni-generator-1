@@ -89,7 +89,7 @@ class IntegrationTest extends FunSpec {
   def djinniParams(idl: String, baseOutputPath: String = "src/it/resources/result", // this should never change, see removeTestOutputDirectory, and it is also used on other locations
                    cpp: Boolean = true, java: Boolean = true, objc: Boolean = true,
                    python: Boolean = true, cWrapper: Boolean = true, cppCLI: Boolean = true,
-                   useNNHeader: Boolean = false): String = {
+                   yaml: Boolean = true, useNNHeader: Boolean = false): String = {
     var cmd = s"--idl src/it/resources/$idl.djinni"
     if (cpp) {
       cmd += s" --cpp-out $baseOutputPath/$idl/$CPP"
@@ -124,6 +124,10 @@ class IntegrationTest extends FunSpec {
       cmd += s" --cppcli-header-out $baseOutputPath/$idl/$CPPCLI_HEADERS"
       cmd += s" --cppcli-include-prefix ../$CPPCLI_HEADERS/"
       cmd += s" --cppcli-include-cpp-prefix ../$CPP_HEADERS/"
+    }
+    if (yaml) {
+      cmd += s" --yaml-out $baseOutputPath/$idl/"
+      cmd += s" --yaml-out-file $idl.yaml"
     }
     if (useNNHeader) {
       cmd += " --cpp-nn-header nn.hpp"

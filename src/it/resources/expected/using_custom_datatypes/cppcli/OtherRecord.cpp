@@ -5,11 +5,11 @@
 #include "djinni/cppcli/Marshal.hpp"
 #include <memory>
 
-OtherRecord::OtherRecord(CustomDatatype^ customDatatypeData)
+OtherRecord::OtherRecord(::CustomDatatype^ customDatatypeData)
 : _customDatatypeData(customDatatypeData)
 {}
 
-CustomDatatype^ OtherRecord::CustomDatatypeData::get()
+::CustomDatatype^ OtherRecord::CustomDatatypeData::get()
 {
     return _customDatatypeData;
 }

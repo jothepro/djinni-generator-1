@@ -152,7 +152,7 @@ class YamlGenerator(spec: Spec) extends Generator(spec) {
   private def cs(td: TypeDecl) = Map[String, Any](
     "translator" -> QuotedString(cppCliMarshal.helperName(mexpr(td))),
     "header" -> QuotedString(cppCliMarshal.include(td.ident)),
-    "typename" -> cppCliMarshal.fqParamType(mexpr(td)),
+    "typename" -> QuotedString(cppCliMarshal.fqParamType(mexpr(td))),
     "reference" -> cppCliMarshal.isReference(td)
   )
 

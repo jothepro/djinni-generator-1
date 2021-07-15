@@ -9,6 +9,7 @@ src/it/resources/result/all_datatypes/objcpp-headers/ITAllDatatypes+Private.h
 src/it/resources/result/all_datatypes/objcpp/ITAllDatatypes+Private.mm
 src/it/resources/result/all_datatypes/cppcli-headers/AllDatatypes.hpp
 src/it/resources/result/all_datatypes/cppcli/AllDatatypes.cpp
+src/it/resources/result/all_datatypes/all_datatypes.yaml
 src/it/resources/result/all_datatypes/python/dh__list_bool.py
 src/it/resources/result/all_datatypes/python/dh__set_bool.py
 src/it/resources/result/all_datatypes/python/dh__map_int8_t_bool.py
