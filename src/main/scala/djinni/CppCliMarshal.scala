@@ -27,23 +27,23 @@ class CppCliMarshal(spec: Spec) extends Marshal(spec) {
   def typename(ty: TypeRef, needsHandle: Boolean): String = toCppCliType(ty, Some(spec.cppCliNamespace), Seq(), needsHandle)
   def typename(name: String, ty: TypeDef): String = idCs.ty(name)
 
-  override def fqTypename(tm: meta.MExpr): String = toCppCliType(tm, Some(spec.cppCliNamespace), Seq(), needsHandle = true)
+  override def fqTypename(tm: meta.MExpr): String = toCppCliType(tm, None, Seq(), needsHandle = true)
 
   override def paramType(tm: meta.MExpr): String = typename(tm)
-  def paramType(tm: MExpr, scopeSymbols: Seq[String]): String = toCppCliType(tm, Some(spec.cppCliNamespace), scopeSymbols, needsHandle = true)
+  def paramType(tm: MExpr, scopeSymbols: Seq[String]): String = toCppCliType(tm, None, scopeSymbols, needsHandle = true)
   def paramType(ty: TypeRef, scopeSymbols: Seq[String]): String = paramType(ty.resolved, scopeSymbols)
 
   override def fqParamType(tm: meta.MExpr): String = paramType(tm)
 
   override def returnType(ret: Option[TypeRef]): String = returnType(ret, Seq())
-  def returnType(ret: Option[TypeRef], scopeSymbols: Seq[String]): String = ret.fold("void")(toCppCliType(_, Some(spec.cppCliNamespace), scopeSymbols))
+  def returnType(ret: Option[TypeRef], scopeSymbols: Seq[String]): String = ret.fold("void")(toCppCliType(_, None, scopeSymbols))
 
   override def fqReturnType(ret: Option[TypeRef]): String = throw new AssertionError("not applicable")
 
   override def fieldType(tm: meta.MExpr): String = typename(tm)
 
   override def fqFieldType(tm: meta.MExpr): String = throw new AssertionError("not applicable")
-  def fqFieldType(tm: meta.MExpr, scopeSymbols: Seq[String]): String = toCppCliType(tm, Some(spec.cppCliNamespace), scopeSymbols, needsHandle = true)
+  def fqFieldType(tm: meta.MExpr, scopeSymbols: Seq[String]): String = toCppCliType(tm, None, scopeSymbols, needsHandle = true)
 
   def helperClass(name: String): String = idCpp.ty(name)
   private def helperClass(tm: MExpr): String = helperName(tm) + helperTemplates(tm)
